@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SalesTaxesProject:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/SalesTaxesProject_jar</output-path>
+    <root id="archive" name="SalesTaxesProject.jar">
+      <element id="module-output" name="SalesTaxesProject" />
+    </root>
+  </artifact>
+</component>
