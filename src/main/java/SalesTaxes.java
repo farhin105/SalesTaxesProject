@@ -5,5 +5,7 @@ public class SalesTaxes {
         System.out.println("---------- SALES TAXES ----------");
         Store store = Store.getINSTANCE();
         System.out.println(store.getProductsInStore());
+        System.out.println(store.getProductToPriceMap());
+        System.out.println(store.getProductToCategoryMap());
     }
 }

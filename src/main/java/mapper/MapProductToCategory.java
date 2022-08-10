@@ -4,7 +4,6 @@ import Store.ProductCategory;
 import Store.ProductConst;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 public class MapProductToCategory extends MapProductToAttribute{
 
@@ -15,6 +14,12 @@ public class MapProductToCategory extends MapProductToAttribute{
             put(CONST.SN_ONE_BOOK, CONST.CATEGORY_ONE_BOOK);
             put(CONST.SN_ONE_MUSIC_CD, CONST.CATEGORY_ONE_MUSIC_CD);
             put(CONST.SN_ONE_CHOCOLATE_BAR, CONST.CATEGORY_ONE_CHOCOLATE_BAR);
+            put(CONST.SN_IMPORTED_BOX_CHOCOLATE, CONST.CATEGORY_IMPORTED_BOX_CHOCOLATE);
+            put(CONST.SN_IMPORTED_BOTTLE_PERFUME_1, CONST.CATEGORY_IMPORTED_BOTTLE_PERFUME_1);
+            put(CONST.SN_IMPORTED_BOTTLE_PERFUME_2, CONST.CATEGORY_IMPORTED_BOTTLE_PERFUME_2);
+            put(CONST.SN_BOTTLE_PERFUME, CONST.CATEGORY_BOTTLE_PERFUME);
+            put(CONST.SN_PACKET_HEADACHE_PILLS, CONST.CATEGORY_PACKET_HEADACHE_PILLS);
+            put(CONST.SN_BOX_IMPORTED_CHOCOLATE, CONST.CATEGORY_BOX_IMPORTED_CHOCOLATE);
         }};
         return productToCategoryMap;
     }
