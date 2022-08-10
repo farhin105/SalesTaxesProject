@@ -1,6 +1,12 @@
 package Store;
 
+import mapper.MapProductToAttribute;
+import mapper.MapProductToCategory;
+import mapper.MapProductToPrice;
+import mapper.MapProductToSerialNumber;
+
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 public final class Store {
     private static Store INSTANCE;
@@ -9,12 +15,15 @@ public final class Store {
     private static HashMap<Integer, Double> productToPriceMap;
     private static HashMap<Integer, ProductCategory> productToCategoryMap;
 
+    private static Logger logger = Logger.getLogger(Store.class.getName());
+
     private Store () {
 
     }
 
     public static Store getINSTANCE () {
         if (INSTANCE==null) {
+            logger.info("initiating Store Instance");
             INSTANCE = new Store();
             INSTANCE.initializeStore();
         }
@@ -27,30 +36,21 @@ public final class Store {
     }
 
     public static void addProductsInStore () {
-        ProductConst CONST = new ProductConst();
-        productsInStore = new HashMap<>(){{
-            put(CONST.SN_ONE_BOOK, CONST.ONE_BOOK);
-            put(CONST.SN_ONE_MUSIC_CD, CONST.ONE_MUSIC_CD);
-            put(CONST.SN_ONE_CHOCOLATE_BAR, CONST.ONE_CHOCOLATE_BAR);
-        }};
+        logger.info("adding product (serial number to name map) in hashmap productsInStore");
+        MapProductToAttribute mapProduct = new MapProductToSerialNumber();
+        productsInStore = mapProduct.getMap();
     }
 
     public static void mapProductsToPrice () {
-        ProductConst CONST = new ProductConst();
-        productToPriceMap = new HashMap<>(){{
-            put(CONST.SN_ONE_BOOK, CONST.PRICE_ONE_BOOK);
-            put(CONST.SN_ONE_MUSIC_CD, CONST.PRICE_ONE_MUSIC_CD);
-            put(CONST.SN_ONE_CHOCOLATE_BAR, CONST.PRICE_ONE_CHOCOLATE_BAR);
-        }};
+        logger.info("adding product (serial number to price map) in hashmap productsInStore");
+        MapProductToAttribute mapProduct = new MapProductToPrice();
+        productToPriceMap = mapProduct.getMap();
     }
 
     public static void mapProductsToCategory () {
-        ProductConst CONST = new ProductConst();
-        productToCategoryMap = new HashMap<>(){{
-            put(CONST.SN_ONE_BOOK, CONST.CATEGORY_ONE_BOOK);
-            put(CONST.SN_ONE_MUSIC_CD, CONST.CATEGORY_ONE_MUSIC_CD);
-            put(CONST.SN_ONE_CHOCOLATE_BAR, CONST.CATEGORY_ONE_CHOCOLATE_BAR);
-        }};
+        logger.fine("adding product (serial number to category map) in hashmap productsInStore");
+        MapProductToAttribute mapProduct = new MapProductToCategory();
+        productToCategoryMap = mapProduct.getMap();
     }
 
     public static HashMap<Integer, String> getProductsInStore() {
