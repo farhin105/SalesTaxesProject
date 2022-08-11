@@ -4,9 +4,9 @@ import mapper.MapKeyToAttribute;
 import mapper.MapKeyToCategory;
 import mapper.MapKeyToName;
 import mapper.MapKeyToPrice;
+import org.apache.log4j.Logger;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 public final class Store {
     private static Store INSTANCE;
@@ -15,7 +15,7 @@ public final class Store {
     private static HashMap<Integer, Double> productToPriceMap;
     private static HashMap<Integer, ProductCategory> productToCategoryMap;
 
-    private static Logger logger = Logger.getLogger(Store.class.getName());
+    private static Logger logger = Logger.getLogger(Store.class);
 
     private Store () {
 
@@ -48,7 +48,7 @@ public final class Store {
     }
 
     public static void mapProductsToCategory () {
-        logger.fine("adding key to category map in hashmap productsInStore");
+        logger.info("adding key to category map in hashmap productsInStore");
         MapKeyToAttribute keyToCategoryMap = new MapKeyToCategory();
         productToCategoryMap = keyToCategoryMap.getMap();
     }
