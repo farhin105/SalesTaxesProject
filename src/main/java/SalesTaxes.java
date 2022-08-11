@@ -1,4 +1,4 @@
-import Store.Store;
+import store.Store;
 
 public class SalesTaxes {
     public static void main(String[] args) {

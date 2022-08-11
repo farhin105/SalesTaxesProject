@@ -1,4 +1,4 @@
-package Store;
+package store;
 
 public final class ProductConstants {
     public final String NAME_ONE_BOOK = "1 book";
