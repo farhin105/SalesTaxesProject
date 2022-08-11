@@ -39,7 +39,7 @@ public class ShoppingServiceImpl implements ShoppingService{
     }
 
     private List<Integer> takeInputItems () {
-        //needs implementation
-        return null;
+        ProductInputService productInputService = new ProductInputServiceImpl();
+        return   productInputService.takeProductInput();
     }
 }
