@@ -1,9 +1,9 @@
 package Store;
 
-import mapper.MapProductToAttribute;
-import mapper.MapProductToCategory;
-import mapper.MapProductToPrice;
-import mapper.MapProductToSerialNumber;
+import mapper.MapKeyToAttribute;
+import mapper.MapKeyToCategory;
+import mapper.MapKeyToName;
+import mapper.MapKeyToPrice;
 
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -36,21 +36,21 @@ public final class Store {
     }
 
     public static void addProductsInStore () {
-        logger.info("adding product (serial number to name map) in hashmap productsInStore");
-        MapProductToAttribute mapProduct = new MapProductToSerialNumber();
-        productsInStore = mapProduct.getMap();
+        logger.info("adding key to name map in hashmap productsInStore");
+        MapKeyToAttribute keyToNameMap = new MapKeyToName();
+        productsInStore = keyToNameMap.getMap();
     }
 
     public static void mapProductsToPrice () {
-        logger.info("adding product (serial number to price map) in hashmap productsInStore");
-        MapProductToAttribute mapProduct = new MapProductToPrice();
-        productToPriceMap = mapProduct.getMap();
+        logger.info("adding key to price map in hashmap productsInStore");
+        MapKeyToAttribute keyToPriceMap = new MapKeyToPrice();
+        productToPriceMap = keyToPriceMap.getMap();
     }
 
     public static void mapProductsToCategory () {
-        logger.fine("adding product (serial number to category map) in hashmap productsInStore");
-        MapProductToAttribute mapProduct = new MapProductToCategory();
-        productToCategoryMap = mapProduct.getMap();
+        logger.fine("adding key to category map in hashmap productsInStore");
+        MapKeyToAttribute keyToCategoryMap = new MapKeyToCategory();
+        productToCategoryMap = keyToCategoryMap.getMap();
     }
 
     public static HashMap<Integer, String> getProductsInStore() {
