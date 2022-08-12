@@ -5,7 +5,7 @@ import product.Product;
 import java.util.List;
 
 public interface ShoppingService {
-    void shop ();
+    List<Integer> shop ();
     void showShopScreen ();
-    List<Product> getShoppingBasket ();
+    List<Product> getProducts (List<Integer> inputItems);
 }

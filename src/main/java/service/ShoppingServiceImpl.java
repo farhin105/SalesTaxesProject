@@ -8,15 +8,14 @@ import repository.StoreRepository;
 import java.util.List;
 
 public class ShoppingServiceImpl implements ShoppingService{
-    private List<Product> shoppingBasket;
 
     private static Logger logger = LoggerFactory.getLogger(ShoppingServiceImpl.class);
 
     @Override
-    public void shop() {
+    public List<Integer> shop() {
         showShopScreen();
         List<Integer> inputItems = takeInputItems();
-        //get List
+        return inputItems;
     }
 
     @Override
@@ -34,12 +33,13 @@ public class ShoppingServiceImpl implements ShoppingService{
     }
 
     @Override
-    public List<Product> getShoppingBasket() {
-        //needs implementation
-        return null;
+    public List<Product> getProducts (List<Integer> inputItems) {
+        ProductServiceImpl productService = new ProductServiceImpl();
+
+        return productService.getProductsFromInputItems(inputItems);
     }
 
-    private List<Integer> takeInputItems () {
+    public List<Integer> takeInputItems () {
         ProductInputService productInputService = new ProductInputServiceImpl();
         return   productInputService.takeProductInput();
     }
