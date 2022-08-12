@@ -22,7 +22,7 @@ public class ProductInputServiceImpl implements ProductInputService {
         do {
             System.out.println("Please input the mentioned product number, or type '0' (zero) to terminate");
             itemKey = takeItemKeyInput();
-            if (itemKey != 0) {
+            if (isInputValid(itemKey)) {
                 itemKeys.add(itemKey);
             }
         } while (itemKey != 0);
@@ -32,8 +32,9 @@ public class ProductInputServiceImpl implements ProductInputService {
 
     public Integer takeItemKeyInput() {
         Integer input = scanInput();
-        if (!isInputValid(input)) {
+        if (!isInputInRange(input)) {
             logger.error("takeItemKeyInput() : input invalid");
+            System.out.println("Invalid input.");
             return INVALID_INPUT;
         }
         return input;
@@ -51,6 +52,10 @@ public class ProductInputServiceImpl implements ProductInputService {
     }
 
     private boolean isInputValid(Integer itemKey) {
+        return itemKey > 0 && itemKey <= TOTAL_INPUTS;
+    }
+
+    private boolean isInputInRange(Integer itemKey) {
         return itemKey >= 0 && itemKey <= TOTAL_INPUTS;
     }
 }
