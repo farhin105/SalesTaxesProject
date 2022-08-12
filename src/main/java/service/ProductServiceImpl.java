@@ -3,9 +3,9 @@ package service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import product.*;
+import product_manager.*;
 import repository.StoreRepository;
 import store.ProductCategory;
-import store.Store;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,21 +46,25 @@ public class ProductServiceImpl implements ProductService{
             return null;
         }
 
-        Store store = Store.getINSTANCE();
+        StoreRepository storeRepository = new StoreRepository();
         boolean isImported = isProductImported(itemKey);
 
-        if (store.getProductToCategoryMap().get(itemKey) == ProductCategory.BOOK) {
-            return new BookProduct(store.getProductsInStore().get(itemKey), store.getProductToPriceMap().get(itemKey),ProductCategory.BOOK, isImported);
+        ProductCategory category = storeRepository.getProductToCategoryMap().get(itemKey);
+
+        ProductManager productManager;
+        if (category == ProductCategory.BOOK) {
+            productManager = new BookProductManager();
         }
-        else if (store.getProductToCategoryMap().get(itemKey) == ProductCategory.MEDICAL) {
-            return new MedicalProduct(store.getProductsInStore().get(itemKey), store.getProductToPriceMap().get(itemKey),ProductCategory.BOOK, isImported);
+        else if (category == ProductCategory.MEDICAL) {
+            productManager = new MedicalProductManager();
         }
-        else if (store.getProductToCategoryMap().get(itemKey) == ProductCategory.FOOD) {
-            return new FoodProduct(store.getProductsInStore().get(itemKey), store.getProductToPriceMap().get(itemKey),ProductCategory.BOOK, isImported);
+        else if (category == ProductCategory.FOOD) {
+            productManager = new FoodProductManager();
         }
         else {
-            return new OtherProduct(store.getProductsInStore().get(itemKey), store.getProductToPriceMap().get(itemKey),ProductCategory.BOOK, isImported);
+            productManager = new OtherProductManager();
         }
+        return productManager.getProduct(storeRepository.getProductsInStore().get(itemKey), storeRepository.getProductToPriceMap().get(itemKey), isImported);
     }
 
     private boolean isInputValid (Integer inputItem) {
