@@ -4,7 +4,8 @@ import mapper.MapKeyToAttribute;
 import mapper.MapKeyToCategory;
 import mapper.MapKeyToName;
 import mapper.MapKeyToPrice;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -15,7 +16,7 @@ public final class Store {
     private static HashMap<Integer, Double> productToPriceMap;
     private static HashMap<Integer, ProductCategory> productToCategoryMap;
 
-    private static Logger logger = Logger.getLogger(Store.class);
+    private static Logger logger = LoggerFactory.getLogger(Store.class);
 
     private Store () {
 
@@ -23,7 +24,7 @@ public final class Store {
 
     public static Store getINSTANCE () {
         if (INSTANCE==null) {
-            logger.info("initiating Store Instance");
+            logger.info("getINSTANCE() : initiating Store Instance" );
             INSTANCE = new Store();
             INSTANCE.initializeStore();
         }
@@ -36,19 +37,19 @@ public final class Store {
     }
 
     public static void addProductsInStore () {
-        logger.info("adding key to name map in hashmap productsInStore");
+        logger.info("addProductsInStore () : adding key to name map in hashmap productsInStore");
         MapKeyToAttribute keyToNameMap = new MapKeyToName();
         productsInStore = keyToNameMap.getMap();
     }
 
     public static void mapProductsToPrice () {
-        logger.info("adding key to price map in hashmap productsInStore");
+        logger.info("mapProductsToPrice () : adding key to price map in hashmap productsInStore");
         MapKeyToAttribute keyToPriceMap = new MapKeyToPrice();
         productToPriceMap = keyToPriceMap.getMap();
     }
 
     public static void mapProductsToCategory () {
-        logger.info("adding key to category map in hashmap productsInStore");
+        logger.info("mapProductsToCategory () : adding key to category map in hashmap productsInStore");
         MapKeyToAttribute keyToCategoryMap = new MapKeyToCategory();
         productToCategoryMap = keyToCategoryMap.getMap();
     }

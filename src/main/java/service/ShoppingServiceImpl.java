@@ -1,6 +1,7 @@
 package service;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import product.Product;
 import store.Store;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class ShoppingServiceImpl implements ShoppingService{
     private List<Product> shoppingBasket;
 
-    private static Logger logger = Logger.getLogger(ShoppingServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(ShoppingServiceImpl.class);
 
     @Override
     public void shop() {
@@ -20,7 +21,7 @@ public class ShoppingServiceImpl implements ShoppingService{
 
     @Override
     public void showShopScreen() {
-        logger.info("showing products on screen");
+        logger.info("showShopScreen() : showing products on screen");
 
         Store store = Store.getINSTANCE();
 

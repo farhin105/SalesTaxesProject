@@ -1,6 +1,7 @@
 package service;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -10,11 +11,11 @@ import java.util.Scanner;
 public class ProductInputServiceImpl implements ProductInputService {
     public static final Integer INVALID_INPUT = 9999;
     public static final Integer TOTAL_INPUTS = 9;
-    private static Logger logger = Logger.getLogger(ProductInputServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(ProductInputServiceImpl.class);
 
     @Override
     public List<Integer> takeProductInput() {
-        logger.info("shopping processing, taking input for product");
+        logger.info("takeProductInput() : shopping processing, taking input for product");
         Integer itemKey;
 
         List<Integer> itemKeys = new ArrayList<>();
@@ -25,14 +26,14 @@ public class ProductInputServiceImpl implements ProductInputService {
                 itemKeys.add(itemKey);
             }
         } while (itemKey != 0);
-        logger.info("shopping ended, input terminated");
+        logger.info("takeProductInput() : shopping ended, input terminated");
         return itemKeys;
     }
 
     public Integer takeItemKeyInput() {
         Integer input = scanInput();
         if (!isInputValid(input)) {
-            logger.error("input invalid");
+            logger.error("takeItemKeyInput() : input invalid");
             return INVALID_INPUT;
         }
         return input;
@@ -44,7 +45,7 @@ public class ProductInputServiceImpl implements ProductInputService {
             Integer input = sc.nextInt();
             return input;
         } catch (InputMismatchException exception) {
-            logger.error("invalid input: InputMismatchException");
+            logger.error("takeItemKeyInput() : invalid input: InputMismatchException");
             return INVALID_INPUT;
         }
     }
