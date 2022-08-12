@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import product.*;
 import store.ProductCategory;
+import store.ProductConstants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +87,37 @@ class ProductServiceImplTest {
         List<Product> actualList = spyProductService.getProductsFromInputItems(null);
 
         assertNull(actualList);
+    }
+
+    @Test
+    void getProductForItemKeyShouldReturnProductOfExpectedClass() {
+        ProductConstants CONST = new ProductConstants();
+        ProductServiceImpl productService = new ProductServiceImpl();
+
+        assertEquals(BookProduct.class, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).getClass());
+        assertEquals(FoodProduct.class, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).getClass());
+        assertEquals(MedicalProduct.class, productService.getProductForItemKey(CONST.KEY_PACKET_HEADACHE_PILLS).getClass());
+        assertEquals(OtherProduct.class, productService.getProductForItemKey(CONST.KEY_BOTTLE_PERFUME).getClass());
+    }
+
+    @Test
+    void getProductForItemKeyShouldReturnProductWithExpectedImportedField() {
+        ProductConstants CONST = new ProductConstants();
+        ProductServiceImpl productService = new ProductServiceImpl();
+
+        assertEquals(false, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).isImported());
+        assertEquals(true, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).isImported());
+        assertEquals(false, productService.getProductForItemKey(CONST.KEY_PACKET_HEADACHE_PILLS).isImported());
+        assertEquals(false, productService.getProductForItemKey(CONST.KEY_BOTTLE_PERFUME).isImported());
+    }
+
+    @Test
+    void getProductForItemKeyShouldReturnNullForInvalidInput() {
+        ProductServiceImpl productService = new ProductServiceImpl();
+
+        assertEquals(null, productService.getProductForItemKey(99));
+        assertEquals(null, productService.getProductForItemKey(0));
+        assertEquals(null, productService.getProductForItemKey(9999));
     }
 
 }

@@ -74,6 +74,6 @@ public class ProductServiceImpl implements ProductService{
 
     private boolean isProductImported (Integer inputItem) {
         // dummy implementation. need to implement
-        return inputItem==4;
+        return inputItem==4 || inputItem==5 || inputItem==6 || inputItem==9;
     }
 }
