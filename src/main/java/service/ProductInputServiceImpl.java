@@ -1,7 +1,8 @@
 package service;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;;
+import org.slf4j.LoggerFactory;
+import repository.StoreRepository;;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class ProductInputServiceImpl implements ProductInputService {
     public static final Integer INVALID_INPUT = 9999;
-    public static final Integer TOTAL_INPUTS = 9;
+
     private static Logger logger = LoggerFactory.getLogger(ProductInputServiceImpl.class);
 
     @Override
@@ -51,11 +52,17 @@ public class ProductInputServiceImpl implements ProductInputService {
         }
     }
 
+    private Integer getTotalInputs() {
+        logger.info("getTotalInputs() : fetching store size");
+        StoreRepository storeRepository = new StoreRepository();
+        return storeRepository.getStoreSize();
+    }
+
     private boolean isInputValid(Integer itemKey) {
-        return itemKey > 0 && itemKey <= TOTAL_INPUTS;
+        return itemKey > 0 && itemKey <= getTotalInputs();
     }
 
     private boolean isInputInRange(Integer itemKey) {
-        return itemKey >= 0 && itemKey <= TOTAL_INPUTS;
+        return itemKey >= 0 && itemKey <= getTotalInputs();
     }
 }

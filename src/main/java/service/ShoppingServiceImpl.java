@@ -3,6 +3,7 @@ package service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import product.Product;
+import repository.StoreRepository;
 import store.Store;
 
 import java.util.List;
@@ -23,13 +24,13 @@ public class ShoppingServiceImpl implements ShoppingService{
     public void showShopScreen() {
         logger.info("showShopScreen() : showing products on screen");
 
-        Store store = Store.getINSTANCE();
+        StoreRepository storeRepository = new StoreRepository();
 
         System.out.println("Input corresponding number to purchase the product:");
-        for (int i=1; i<=store.getProductsInStore().size(); i++ ) {
+        for (int i=1; i<=storeRepository.getProductsInStore().size(); i++ ) {
             System.out.println(i+". ["
-                    +store.getProductsInStore().get(i)+" at "
-                    +store.getProductToPriceMap().get(i)+"]");
+                    +storeRepository.getProductsInStore().get(i)+" at "
+                    +storeRepository.getProductToPriceMap().get(i)+"]");
         }
     }
 
