@@ -4,16 +4,16 @@ import product.Product;
 
 import java.util.List;
 
-public class BillingReceipt {
+public class Receipt {
     private List<Product> productList;
     private List<Double> productBillList;
     private Double salesTaxes;
     private Double totalBill;
 
-    public BillingReceipt() {
+    public Receipt() {
     }
 
-    public BillingReceipt(List<Product> productList, List<Double> productBillList, Double salesTaxes, Double totalBill) {
+    public Receipt(List<Product> productList, List<Double> productBillList, Double salesTaxes, Double totalBill) {
         this.productList = productList;
         this.productBillList = productBillList;
         this.salesTaxes = salesTaxes;

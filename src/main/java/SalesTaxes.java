@@ -9,5 +9,7 @@ public class SalesTaxes {
 
         ShoppingService shoppingService = new ShoppingServiceImpl();
         shoppingService.shop();
+
+        //getReceipt
     }
 }
