@@ -17,6 +17,6 @@ public class TaxCalculator {
     }
 
     private Double roundValue (Double value) {
-        return (Math.round(value * 20.0) )/ 20.0;
+        return (Math.ceil(value * 20.0) )/ 20.0;
     }
 }

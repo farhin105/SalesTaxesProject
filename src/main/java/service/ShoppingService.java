@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ShoppingService {
 
-    private static final Logger logger = LoggerFactory.getLogger(ShoppingService.class);
+    private static Logger logger = LoggerFactory.getLogger(ShoppingService.class);
 
-    private final ProductInputService productInputService;
-    private final ProductService productService;
-    private final StoreRepository storeRepository;
+    private ProductInputService productInputService;
+    private ProductService productService;
+    private StoreRepository storeRepository;
 
     @Inject
     public ShoppingService(ProductInputService productInputService,
@@ -25,7 +25,8 @@ public class ShoppingService {
     }
     public List<Integer> shop() {
         showShopScreen();
-        return takeInputItems();
+        List<Integer> inputItems = takeInputItems();
+        return inputItems;
     }
 
 
@@ -42,12 +43,10 @@ public class ShoppingService {
 
 
     public List<Product> getProducts (List<Integer> inputItems) {
-
         return productService.getProductsFromInputItems(inputItems);
     }
 
     public List<Integer> takeInputItems () {
-
         return   productInputService.takeProductInput();
     }
 }

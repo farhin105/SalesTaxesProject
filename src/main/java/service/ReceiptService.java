@@ -31,7 +31,16 @@ public class ReceiptService {
         return receipt;
     }
 
-    public List<Double> getBillList(List<Product> productList) {
+    public void printReceipt(Receipt receipt) {
+        for (int i = 0; i<receipt.getProductBillList().size(); i++) {
+            System.out.println(receipt.getProductList().get(i).getName()+ " : "
+                    + receipt.getProductBillList().get(i));
+        }
+        System.out.println("Sales Taxes : "+receipt.getSalesTaxes());
+        System.out.println("Total Bill : "+ receipt.getTotalBill());
+    }
+
+    private List<Double> getBillList(List<Product> productList) {
         List<Double> productBillList = new ArrayList<>();
 
         for (Product product : productList) {
@@ -40,7 +49,7 @@ public class ReceiptService {
         return productBillList;
     }
 
-    public Double getSalexTaxes(List<Product> productList) {
+    private Double getSalexTaxes(List<Product> productList) {
         Double salesTaxes = 0.0;
 
         for (Product product : productList) {
@@ -49,19 +58,16 @@ public class ReceiptService {
         return format(salesTaxes);
     }
 
-    public Double getTotalBill(List<Product> productList) {
+    private Double getTotalBill(List<Product> productList) {
         Double totalBill = 0.0;
         for (Product product : productList) {
             totalBill += billingService.calculateBillOfProduct(product);
         }
+
         return format(totalBill);
     }
 
     private Double format (Double value) {
-        //value = roundValue(value);
         return Double.valueOf(new DecimalFormat("0.00").format(value));
-    }
-    private Double roundValue (Double value) {
-        return (Math.round(value * 20.0) )/ 20.0;
     }
 }

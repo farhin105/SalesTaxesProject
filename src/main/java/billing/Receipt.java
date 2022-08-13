@@ -5,13 +5,10 @@ import product.Product;
 import java.util.List;
 
 public class Receipt {
-    private List<Product> productList;
-    private List<Double> productBillList;
-    private Double salesTaxes;
-    private Double totalBill;
-
-    public Receipt() {
-    }
+    private final List<Product> productList;
+    private final List<Double> productBillList;
+    private final Double salesTaxes;
+    private final Double totalBill;
 
     public Receipt(List<Product> productList, List<Double> productBillList, Double salesTaxes, Double totalBill) {
         this.productList = productList;
@@ -36,11 +33,4 @@ public class Receipt {
         return totalBill;
     }
 
-    public void printReceipt() {
-        for (int i = 0; i<productList.size(); i++) {
-            System.out.println(productList.get(i).getName()+ " : " + productBillList.get(i));
-        }
-        System.out.println("Sales Taxes : "+salesTaxes);
-        System.out.println("Total Bill : "+ totalBill);
-    }
 }

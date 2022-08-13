@@ -24,6 +24,6 @@ public class SalesTaxes {
         ReceiptService receiptService = injector.getInstance(ReceiptService.class);
         //getReceipt
         Receipt receipt = receiptService.getReceipt(productList);
-        receipt.printReceipt();
+        receiptService.printReceipt(receipt);
     }
 }
