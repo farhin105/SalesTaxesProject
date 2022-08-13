@@ -33,4 +33,14 @@ public abstract class Product {
     public boolean isImported() {
         return isImported;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                ", isImported=" + isImported +
+                '}';
+    }
 }

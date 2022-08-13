@@ -2,18 +2,16 @@ package service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import product.*;
-import store.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ShoppingServiceImplTest {
+class ShoppingServiceTest {
     @Test
     void shopShouldCallShowShopScreen() {
-        ShoppingServiceImpl spyShoppingService = Mockito.spy(ShoppingServiceImpl.class);
+        ShoppingService spyShoppingService = Mockito.spy(ShoppingService.class);
 
         Mockito.doReturn(null).when(spyShoppingService).takeInputItems();
 
@@ -23,7 +21,7 @@ class ShoppingServiceImplTest {
 
     @Test
     void shopShouldReturnExpectedList() {
-        ShoppingServiceImpl spyShoppingService = Mockito.spy(ShoppingServiceImpl.class);
+        ShoppingService spyShoppingService = Mockito.spy(ShoppingService.class);
 
         List<Integer> expectedList = new ArrayList<>(){{
             add(4);

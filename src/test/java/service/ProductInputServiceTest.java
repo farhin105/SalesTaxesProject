@@ -7,10 +7,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductInputServiceImplTest {
+class ProductInputServiceTest {
     @Test
     void takeItemKeyInputShouldReturnExpectedValueForInputBetweenZeroToNine(){
-        ProductInputServiceImpl spyProductInputService = Mockito.spy(ProductInputServiceImpl.class);
+        ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);
 
         Mockito.doReturn(0).doReturn(8).doReturn(9).when(spyProductInputService).scanInput();
 
@@ -21,7 +21,7 @@ class ProductInputServiceImplTest {
 
     @Test
     void takeItemKeyInputShouldReturnInvalidWhenInputIsNotInRange(){
-        ProductInputServiceImpl spyProductInputService = Mockito.spy(ProductInputServiceImpl.class);
+        ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);
         Integer invalidConst = 9999;
 
         Mockito.doReturn(12).when(spyProductInputService).scanInput();
@@ -31,7 +31,7 @@ class ProductInputServiceImplTest {
 
     @Test
     void takeItemKeyInputShouldReturnInvalidWhenInputInvalidConst(){
-        ProductInputServiceImpl spyProductInputService = Mockito.spy(ProductInputServiceImpl.class);
+        ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);
         Integer invalidConst = 9999;
 
         Mockito.doReturn(invalidConst).when(spyProductInputService).scanInput();
@@ -41,7 +41,7 @@ class ProductInputServiceImplTest {
 
     @Test
     void takeProductInputShouldReturnExpectedList (){
-        ProductInputServiceImpl spyProductInputService = Mockito.spy(ProductInputServiceImpl.class);
+        ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);
         Integer invalidConst = 9999;
 
         Mockito.doReturn(7)
@@ -58,7 +58,7 @@ class ProductInputServiceImplTest {
 
     @Test
     void takeProductInputShouldNotAddInvalidConst (){
-        ProductInputServiceImpl spyProductInputService = Mockito.spy(ProductInputServiceImpl.class);
+        ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);
         Integer invalidConst = 9999;
 
         Mockito.doReturn(invalidConst)

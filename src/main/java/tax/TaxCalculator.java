@@ -4,11 +4,11 @@ import product.Product;
 
 public class TaxCalculator {
     public Double calculateTax(Product product) {
-        TaxService taxService = getAppropriateTaxService(product);
+        TaxService taxService = getTaxService(product);
         return roundValue(taxService.calculateTax(product));
     }
 
-    public TaxService getAppropriateTaxService(Product product) {
+    private TaxService getTaxService(Product product) {
         if (product.isImported()) {
             return new ImportedTaxService();
         } else {

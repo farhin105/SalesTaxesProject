@@ -1,15 +1,28 @@
 package service;
 
 import billing.Receipt;
+import com.google.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import product.Product;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReceiptService {
 
-    public Receipt getBillingReceipt(List<Product> productList) {
-        List<Double> productBillList = getAllProductBill(productList);
+    private final Logger logger = LoggerFactory.getLogger(ReceiptService.class);
+
+    private final BillingService billingService;
+
+    @Inject
+    public ReceiptService(BillingService billingService) {
+        this.billingService = billingService;
+    }
+
+    public Receipt getReceipt(List<Product> productList) {
+        List<Double> productBillList = getBillList(productList);
         Double salesTaxes = getSalexTaxes(productList);
         Double totalBill = getTotalBill(productList);
 
@@ -18,33 +31,37 @@ public class ReceiptService {
         return receipt;
     }
 
-    public List<Double> getAllProductBill(List<Product> productList) {
+    public List<Double> getBillList(List<Product> productList) {
         List<Double> productBillList = new ArrayList<>();
-        BillingService billingService = new BillingService();
 
         for (Product product : productList) {
-            productBillList.add(billingService.calculateBillOfProduct(product));
+            productBillList.add(format(billingService.calculateBillOfProduct(product)));
         }
         return productBillList;
     }
 
     public Double getSalexTaxes(List<Product> productList) {
         Double salesTaxes = 0.0;
-        BillingService billingService = new BillingService();
 
         for (Product product : productList) {
             salesTaxes += billingService.calculateTaxOfProduct(product);
         }
-        return salesTaxes;
+        return format(salesTaxes);
     }
 
     public Double getTotalBill(List<Product> productList) {
         Double totalBill = 0.0;
-        BillingService billingService = new BillingService();
         for (Product product : productList) {
             totalBill += billingService.calculateBillOfProduct(product);
         }
-        return totalBill;
+        return format(totalBill);
     }
 
+    private Double format (Double value) {
+        //value = roundValue(value);
+        return Double.valueOf(new DecimalFormat("0.00").format(value));
+    }
+    private Double roundValue (Double value) {
+        return (Math.round(value * 20.0) )/ 20.0;
+    }
 }

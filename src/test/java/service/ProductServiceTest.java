@@ -3,6 +3,7 @@ package service;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import product.*;
+import repository.StoreRepository;
 import store.ProductCategory;
 import store.ProductConstants;
 
@@ -11,7 +12,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ProductServiceImplTest {
+class ProductServiceTest {
+    private final StoreRepository storeRepository = new StoreRepository();
+
     private BookProduct bookProduct = new BookProduct("book1", 12.8, ProductCategory.BOOK,false);
     private MedicalProduct medicalProduct = new MedicalProduct("medical1", 0.32,ProductCategory.MEDICAL,false);
     private FoodProduct foodProduct = new FoodProduct("food1", 11.58,ProductCategory.FOOD,true);
@@ -20,7 +23,7 @@ class ProductServiceImplTest {
 
     @Test
     void getProductsFromInputItemsShouldReturnExpectedProductList() {
-        ProductServiceImpl spyProductService = Mockito.spy(ProductServiceImpl.class);
+        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
 
         List<Integer> dummyInputList = new ArrayList<>(){{
             add(1);
@@ -53,7 +56,7 @@ class ProductServiceImplTest {
      * it should ignore it and should not add it in result list.
      */
     void getProductsFromInputItemsShouldIgnoreNullProduct() {
-        ProductServiceImpl spyProductService = Mockito.spy(ProductServiceImpl.class);
+        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
 
         List<Integer> dummyInputList = new ArrayList<>(){{
             add(1);
@@ -82,7 +85,7 @@ class ProductServiceImplTest {
 
     @Test
     void getProductsFromInputItemsShouldReturnNullForNullInputList() {
-        ProductServiceImpl spyProductService = Mockito.spy(ProductServiceImpl.class);
+        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
 
         List<Product> actualList = spyProductService.getProductsFromInputItems(null);
 
@@ -92,8 +95,9 @@ class ProductServiceImplTest {
     @Test
     void getProductForItemKeyShouldReturnProductOfExpectedClass() {
         ProductConstants CONST = new ProductConstants();
-        ProductServiceImpl productService = new ProductServiceImpl();
+        ProductService productService = new ProductService(storeRepository);
 
+        //Mockito.doReturn()
         assertEquals(BookProduct.class, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).getClass());
         assertEquals(FoodProduct.class, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).getClass());
         assertEquals(MedicalProduct.class, productService.getProductForItemKey(CONST.KEY_PACKET_HEADACHE_PILLS).getClass());
@@ -103,7 +107,7 @@ class ProductServiceImplTest {
     @Test
     void getProductForItemKeyShouldReturnProductWithExpectedImportedField() {
         ProductConstants CONST = new ProductConstants();
-        ProductServiceImpl productService = new ProductServiceImpl();
+        ProductService productService = new ProductService(storeRepository);
 
         assertEquals(false, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).isImported());
         assertEquals(true, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).isImported());
@@ -113,7 +117,7 @@ class ProductServiceImplTest {
 
     @Test
     void getProductForItemKeyShouldReturnNullForInvalidInput() {
-        ProductServiceImpl productService = new ProductServiceImpl();
+        ProductService productService = new ProductService(storeRepository);
 
         assertEquals(null, productService.getProductForItemKey(99));
         assertEquals(null, productService.getProductForItemKey(0));
