@@ -12,7 +12,7 @@ class MapKeyToNameTest {
     void keyShouldMapToExpectedName () {
         ProductConstants CONST = new ProductConstants();
         var mapKeyToName = new MapKeyToName();
-        HashMap<Integer, String> nameMap = mapKeyToName.getMap();
+        HashMap<Integer, String> nameMap = mapKeyToName.mapKeyToName();
 
         assertEquals(CONST.NAME_ONE_BOOK, nameMap.get(CONST.KEY_ONE_BOOK));
         assertEquals(CONST.NAME_ONE_MUSIC_CD, nameMap.get(CONST.KEY_ONE_MUSIC_CD));

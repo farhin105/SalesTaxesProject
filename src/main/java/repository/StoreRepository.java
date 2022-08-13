@@ -59,6 +59,6 @@ public class StoreRepository {
     }
 
     public boolean isItemImported (Integer key) {
-        return key==4 || key==5 || key==6 || key==9;
+        return Store.getImportedProductKeySet().contains(key);
     }
 }

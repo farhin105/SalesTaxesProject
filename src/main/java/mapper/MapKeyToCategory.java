@@ -5,10 +5,9 @@ import store.ProductConstants;
 
 import java.util.HashMap;
 
-public class MapKeyToCategory extends MapKeyToAttribute{
+public class MapKeyToCategory {
 
-    @Override
-    public HashMap mapKeyToAttribute() {
+    public HashMap<Integer, ProductCategory> mapKeyToCategory() {
         ProductConstants CONST = new ProductConstants();
         HashMap<Integer, ProductCategory> keyToCategoryMap = new HashMap<>(){{
             put(CONST.KEY_ONE_BOOK, CONST.CATEGORY_ONE_BOOK);

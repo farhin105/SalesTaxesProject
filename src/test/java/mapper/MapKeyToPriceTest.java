@@ -12,7 +12,7 @@ class MapKeyToPriceTest {
     void keyShouldMapToExpectedPrice () {
         ProductConstants CONST = new ProductConstants();
         var mapKeyToPrice = new MapKeyToPrice();
-        HashMap<Integer, String> mapToPrice = mapKeyToPrice.getMap();
+        HashMap<Integer,Double> mapToPrice = mapKeyToPrice.mapKeyToPrice();
 
         assertEquals(CONST.PRICE_ONE_BOOK, mapToPrice.get(CONST.KEY_ONE_BOOK));
         assertEquals(CONST.PRICE_ONE_MUSIC_CD, mapToPrice.get(CONST.KEY_ONE_MUSIC_CD));

@@ -1,13 +1,12 @@
 package store;
 
-import mapper.MapKeyToAttribute;
-import mapper.MapKeyToCategory;
-import mapper.MapKeyToName;
-import mapper.MapKeyToPrice;
+import mapper.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import service.StoreService;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 public final class Store {
     private static Logger logger = LoggerFactory.getLogger(Store.class);
@@ -17,7 +16,7 @@ public final class Store {
     private static HashMap<Integer, String> productsInStore;
     private static HashMap<Integer, Double> productToPriceMap;
     private static HashMap<Integer, ProductCategory> productToCategoryMap;
-
+    private static HashSet<Integer> importedProductKeySet;
     private Store () {
 
     }
@@ -34,24 +33,35 @@ public final class Store {
         addProductsInStore();
         mapProductsToPrice();
         mapProductsToCategory();
+        setImportedProductKeys ();
     }
 
-    public static void addProductsInStore () {
+    private static void addProductsInStore () {
         logger.info("addProductsInStore () : adding key to name map in hashmap productsInStore");
-        MapKeyToAttribute keyToNameMap = new MapKeyToName();
-        productsInStore = keyToNameMap.getMap();
+
+        productsInStore = new StoreService().getNameMap();
     }
 
-    public static void mapProductsToPrice () {
+    private static void mapProductsToPrice () {
         logger.info("mapProductsToPrice () : adding key to price map in hashmap productsInStore");
-        MapKeyToAttribute keyToPriceMap = new MapKeyToPrice();
-        productToPriceMap = keyToPriceMap.getMap();
+
+        productToPriceMap = new StoreService().getPriceMap();
     }
 
-    public static void mapProductsToCategory () {
+    private static void mapProductsToCategory () {
         logger.info("mapProductsToCategory () : adding key to category map in hashmap productsInStore");
-        MapKeyToAttribute keyToCategoryMap = new MapKeyToCategory();
-        productToCategoryMap = keyToCategoryMap.getMap();
+
+        productToCategoryMap = new StoreService().getCategoryMap();
+    }
+
+    private static void setImportedProductKeys () {
+        logger.info("setImportedProductKeys () : adding keys of imported items in hashset productsInStore");
+
+        importedProductKeySet = new StoreService().getImportedProductSet();
+    }
+
+    public static HashSet<Integer> getImportedProductKeySet() {
+        return importedProductKeySet;
     }
 
     public static HashMap<Integer, String> getProductsInStore() {

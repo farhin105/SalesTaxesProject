@@ -4,11 +4,11 @@ import store.ProductConstants;
 
 import java.util.HashMap;
 
-public class MapKeyToName extends MapKeyToAttribute{
+public class MapKeyToName {
 
-    @Override
-    public HashMap mapKeyToAttribute() {
+    public HashMap<Integer, String> mapKeyToName() {
         ProductConstants CONST = new ProductConstants();
+
         HashMap<Integer, String> keyToNameMap = new HashMap<>(){{
             put(CONST.KEY_ONE_BOOK, CONST.NAME_ONE_BOOK);
             put(CONST.KEY_ONE_MUSIC_CD, CONST.NAME_ONE_MUSIC_CD);

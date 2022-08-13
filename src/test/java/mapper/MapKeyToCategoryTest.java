@@ -1,5 +1,6 @@
 package mapper;
 
+import store.ProductCategory;
 import store.ProductConstants;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +13,7 @@ class MapKeyToCategoryTest {
     void keyShouldMapToExpectedCategory () {
         ProductConstants CONST = new ProductConstants();
         var mapKeyToCategory = new MapKeyToCategory();
-        HashMap<Integer, String> mapToCategory = mapKeyToCategory.getMap();
+        HashMap<Integer, ProductCategory> mapToCategory = mapKeyToCategory.mapKeyToCategory();
 
         assertEquals(CONST.CATEGORY_ONE_BOOK, mapToCategory.get(CONST.KEY_ONE_BOOK));
         assertEquals(CONST.CATEGORY_ONE_MUSIC_CD, mapToCategory.get(CONST.KEY_ONE_MUSIC_CD));
