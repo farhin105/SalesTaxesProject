@@ -11,25 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 class ProductServiceTest {
-    private final StoreRepository storeRepository = new StoreRepository();
+    ProductConstants CONST = new ProductConstants();
+    private final StoreRepository storeRepository = mock(StoreRepository.class);
 
-    private BookProduct bookProduct = new BookProduct("book1", 12.8, ProductCategory.BOOK,false);
-    private MedicalProduct medicalProduct = new MedicalProduct("medical1", 0.32,ProductCategory.MEDICAL,false);
-    private FoodProduct foodProduct = new FoodProduct("food1", 11.58,ProductCategory.FOOD,true);
-    private OtherProduct otherProduct = new OtherProduct("other1", 10.4, ProductCategory.OTHER,false);
+    private final ProductService productService = new ProductService(storeRepository);
+
+    private final BookProduct bookProduct = new BookProduct(CONST.NAME_ONE_BOOK, CONST.PRICE_ONE_BOOK,
+            ProductCategory.BOOK,false);
+    private final OtherProduct otherProduct = new OtherProduct(CONST.NAME_ONE_BOTTLE_PERFUME,
+            CONST.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
+    private final FoodProduct foodProduct = new FoodProduct(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE,
+            CONST.PRICE_IMPORTED_BOX_CHOCOLATE,ProductCategory.FOOD,true);
+    private final MedicalProduct medicalProduct = new MedicalProduct(CONST.NAME_ONE_PACKET_HEADACHE_PILLS,
+            CONST.PRICE_PACKET_HEADACHE_PILLS,ProductCategory.MEDICAL,false);
 
 
     @Test
-    void getProductsFromInputItemsShouldReturnExpectedProductList() {
-        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
-
-        List<Integer> dummyInputList = new ArrayList<>(){{
-            add(1);
-            add(2);
-            add(3);
-            add(4);
+    void getProductsFromInputItemsValidInput() {
+        List<Integer> inputList = new ArrayList<>(){{
+            add(CONST.KEY_ONE_BOOK);
+            add(CONST.KEY_BOTTLE_PERFUME);
+            add(CONST.KEY_IMPORTED_BOX_CHOCOLATE);
+            add(CONST.KEY_PACKET_HEADACHE_PILLS);
         }};
 
         List<Product> expectedList = new ArrayList<>() {{
@@ -38,16 +47,47 @@ class ProductServiceTest {
             add(foodProduct);
             add(medicalProduct);
         }};
-        Mockito.doReturn(bookProduct)
-                .doReturn(otherProduct)
-                .doReturn(foodProduct)
-                .doReturn(medicalProduct)
-                .when(spyProductService).getProductForItemKey(Mockito.anyInt());
 
-        List<Product> actualList = spyProductService.getProductsFromInputItems(dummyInputList);
+        when(storeRepository.getNameOfItem(anyInt())).thenReturn(CONST.NAME_ONE_BOOK)
+                .thenReturn(CONST.NAME_ONE_BOTTLE_PERFUME)
+                .thenReturn(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE)
+                .thenReturn(CONST.NAME_ONE_PACKET_HEADACHE_PILLS);
+
+        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(CONST.PRICE_ONE_BOOK)
+                .thenReturn(CONST.PRICE_BOTTLE_PERFUME)
+                .thenReturn(CONST.PRICE_IMPORTED_BOX_CHOCOLATE)
+                .thenReturn(CONST.PRICE_PACKET_HEADACHE_PILLS);
+
+        when(storeRepository.getCategoryOfItem(anyInt())).thenReturn(ProductCategory.BOOK)
+                .thenReturn(ProductCategory.OTHER)
+                .thenReturn(ProductCategory.FOOD)
+                .thenReturn(ProductCategory.MEDICAL);
+
+        when(storeRepository.isItemImported(anyInt())).thenReturn(false)
+                .thenReturn(false)
+                .thenReturn(true)
+                .thenReturn(false);
+
+        when(storeRepository.getStoreSize()).thenReturn(9);
+
+        List<Product> actualList = productService.getProductsFromInputItems(inputList);
 
         assertEquals(expectedList.size(), actualList.size());
-        assertIterableEquals(expectedList,actualList);
+        assertEquals(expectedList.get(0).getClass(),actualList.get(0).getClass());
+        assertEquals(expectedList.get(1).getClass(),actualList.get(1).getClass());
+        assertEquals(expectedList.get(2).getClass(),actualList.get(2).getClass());
+        assertEquals(expectedList.get(3).getClass(),actualList.get(3).getClass());
+
+        assertEquals(expectedList.get(0).getPrice(),actualList.get(0).getPrice());
+        assertEquals(expectedList.get(1).getPrice(),actualList.get(1).getPrice());
+        assertEquals(expectedList.get(2).getPrice(),actualList.get(2).getPrice());
+        assertEquals(expectedList.get(3).getPrice(),actualList.get(3).getPrice());
+
+        assertEquals(expectedList.get(0).isImported(),actualList.get(0).isImported());
+        assertEquals(expectedList.get(1).isImported(),actualList.get(1).isImported());
+        assertEquals(expectedList.get(2).isImported(),actualList.get(2).isImported());
+        assertEquals(expectedList.get(3).isImported(),actualList.get(3).isImported());
+
     }
 
     @Test
@@ -56,72 +96,43 @@ class ProductServiceTest {
      * it should ignore it and should not add it in result list.
      */
     void getProductsFromInputItemsShouldIgnoreNullProduct() {
-        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
-
-        List<Integer> dummyInputList = new ArrayList<>(){{
-            add(1);
-            add(2);
-            add(3);
-            add(4);
+        List<Integer> inputList = new ArrayList<>(){{
+            add(CONST.KEY_ONE_BOOK);
+            add(999);
+            add(CONST.KEY_IMPORTED_BOX_CHOCOLATE);
         }};
 
         List<Product> expectedList = new ArrayList<>() {{
             add(bookProduct);
-            add(otherProduct);
-            add(medicalProduct);
+            add(foodProduct);
         }};
-        Mockito.doReturn(bookProduct)
-                .doReturn(otherProduct)
-                .doReturn(null)
-                .doReturn(medicalProduct)
-                .when(spyProductService).getProductForItemKey(Mockito.anyInt());
 
-        List<Product> actualList = spyProductService.getProductsFromInputItems(dummyInputList);
+        when(storeRepository.getNameOfItem(anyInt())).thenReturn(CONST.NAME_ONE_BOOK)
+                .thenReturn(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE);
+
+        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(CONST.PRICE_ONE_BOOK)
+                .thenReturn(CONST.PRICE_IMPORTED_BOX_CHOCOLATE);
+
+        when(storeRepository.getCategoryOfItem(anyInt())).thenReturn(ProductCategory.BOOK)
+                .thenReturn(ProductCategory.FOOD);
+
+        when(storeRepository.isItemImported(anyInt())).thenReturn(false)
+                .thenReturn(true);
+
+        when(storeRepository.getStoreSize()).thenReturn(9);
+
+        List<Product> actualList = productService.getProductsFromInputItems(inputList);
 
         assertEquals(expectedList.size(), actualList.size());
-        assertIterableEquals(expectedList,actualList);
-        assertNotEquals(dummyInputList.size(), actualList.size());
+        assertNotEquals(inputList, actualList);
+
+        assertEquals(expectedList.get(0).getClass(),actualList.get(0).getClass());
+        assertEquals(expectedList.get(1).getClass(),actualList.get(1).getClass());
     }
 
     @Test
     void getProductsFromInputItemsShouldReturnNullForNullInputList() {
-        ProductService spyProductService = Mockito.spy(new ProductService(storeRepository));
-
-        List<Product> actualList = spyProductService.getProductsFromInputItems(null);
-
+        List<Product> actualList = productService.getProductsFromInputItems(null);
         assertNull(actualList);
     }
-
-    @Test
-    void getProductForItemKeyShouldReturnProductOfExpectedClass() {
-        ProductConstants CONST = new ProductConstants();
-        ProductService productService = new ProductService(storeRepository);
-
-        //Mockito.doReturn()
-        assertEquals(BookProduct.class, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).getClass());
-        assertEquals(FoodProduct.class, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).getClass());
-        assertEquals(MedicalProduct.class, productService.getProductForItemKey(CONST.KEY_PACKET_HEADACHE_PILLS).getClass());
-        assertEquals(OtherProduct.class, productService.getProductForItemKey(CONST.KEY_BOTTLE_PERFUME).getClass());
-    }
-
-    @Test
-    void getProductForItemKeyShouldReturnProductWithExpectedImportedField() {
-        ProductConstants CONST = new ProductConstants();
-        ProductService productService = new ProductService(storeRepository);
-
-        assertEquals(false, productService.getProductForItemKey(CONST.KEY_ONE_BOOK).isImported());
-        assertEquals(true, productService.getProductForItemKey(CONST.KEY_BOX_IMPORTED_CHOCOLATE).isImported());
-        assertEquals(false, productService.getProductForItemKey(CONST.KEY_PACKET_HEADACHE_PILLS).isImported());
-        assertEquals(false, productService.getProductForItemKey(CONST.KEY_BOTTLE_PERFUME).isImported());
-    }
-
-    @Test
-    void getProductForItemKeyShouldReturnNullForInvalidInput() {
-        ProductService productService = new ProductService(storeRepository);
-
-        assertEquals(null, productService.getProductForItemKey(99));
-        assertEquals(null, productService.getProductForItemKey(0));
-        assertEquals(null, productService.getProductForItemKey(9999));
-    }
-
 }

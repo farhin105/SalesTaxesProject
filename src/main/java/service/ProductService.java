@@ -48,23 +48,23 @@ public class ProductService {
     }
 
 
-    public Product getProductForItemKey (Integer itemKey) {
+    private Product getProductForItemKey (Integer itemKey) {
         if (!isInputValid(itemKey)) {
             logger.error("getProductForItemKey (Integer itemKey) : detected invalid itemKey = {} ",itemKey);
             return null;
         }
 
-        boolean isImported = isProductImported(itemKey);
-
-        ProductCategory category = storeRepository.getProductToCategoryMap().get(itemKey);
+        ProductCategory category = storeRepository.getCategoryOfItem(itemKey);
 
         ProductManager productManager = getProductManager(category);
 
-        return productManager.getProduct(storeRepository.getProductsInStore().get(itemKey), storeRepository.getProductToPriceMap().get(itemKey), isImported);
+        return productManager.getProduct(storeRepository.getNameOfItem(itemKey),
+                storeRepository.getPriceOfItem(itemKey),
+                storeRepository.isItemImported(itemKey));
     }
 
     private ProductManager getProductManager (ProductCategory category) {
-
+        logger.info("getProductManager() : getting expected product manager for category : {}",category);
         return switch (category) {
             case BOOK -> new BookProductManager();
             case MEDICAL -> new MedicalProductManager();
@@ -74,11 +74,8 @@ public class ProductService {
     }
 
     private boolean isInputValid (Integer inputItem) {
+        logger.info("isInputValid() : checking if the input value, {} is valid or not",inputItem);
         return inputItem!=null && inputItem>0 && inputItem<=storeRepository.getStoreSize();
     }
 
-    private boolean isProductImported (Integer inputItem) {
-        // dummy implementation. need to implement
-        return inputItem==4 || inputItem==5 || inputItem==6 || inputItem==9;
-    }
 }

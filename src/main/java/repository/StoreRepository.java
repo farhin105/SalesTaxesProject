@@ -25,4 +25,20 @@ public class StoreRepository {
     }
 
     public Integer getStoreSize () { return store.getProductToPriceMap().size(); }
+
+    public String getNameOfItem (Integer key) {
+        return store.getProductsInStore().get(key);
+    }
+
+    public Double getPriceOfItem (Integer key) {
+        return store.getProductToPriceMap().get(key);
+    }
+
+    public ProductCategory getCategoryOfItem (Integer key) {
+        return store.getProductToCategoryMap().get(key);
+    }
+
+    public boolean isItemImported (Integer key) {
+        return key==4 || key==5 || key==6 || key==9;
+    }
 }

@@ -2,35 +2,42 @@ package service;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import repository.StoreRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 class ShoppingServiceTest {
+    private final ProductInputService productInputService = mock(ProductInputService.class);
+    private final ProductService productService = mock(ProductService.class);
+    private final StoreRepository storeRepository = mock(StoreRepository.class);
+
+    private final ShoppingService shoppingService = new ShoppingService(
+            productInputService,
+            productService,
+            storeRepository
+    );
+
     @Test
-    void shopShouldCallShowShopScreen() {
-        ShoppingService spyShoppingService = Mockito.spy(ShoppingService.class);
+    void shopReturnsExpectedList() {
 
-        Mockito.doReturn(null).when(spyShoppingService).takeInputItems();
-
-        spyShoppingService.shop();
-        Mockito.verify(spyShoppingService, Mockito.times(1)).showShopScreen();
-    }
-
-    @Test
-    void shopShouldReturnExpectedList() {
-        ShoppingService spyShoppingService = Mockito.spy(ShoppingService.class);
-
-        List<Integer> expectedList = new ArrayList<>(){{
-            add(4);
+        List<Integer> expectedList = new ArrayList<>() {{
+            add(1);
+            add(2);
             add(3);
-            add(5);
         }};
+        when(productInputService.takeProductInput()).thenReturn(expectedList);
 
-        Mockito.doReturn(expectedList).when(spyShoppingService).takeInputItems();
+        List<Integer> itemList = shoppingService.shop();
 
-        assertIterableEquals(expectedList, spyShoppingService.shop());
+        assertEquals(expectedList.size(),itemList.size());
+        assertIterableEquals(expectedList, itemList);
     }
+
 }
