@@ -131,7 +131,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void getProductsFromInputItemsShouldReturnNullForNullInputList() {
+    void getProductsFromInputItemsNullInputList() {
         List<Product> actualList = productService.getProductsFromInputItems(null);
         assertNull(actualList);
     }

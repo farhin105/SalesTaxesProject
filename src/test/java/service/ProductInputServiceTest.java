@@ -8,6 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ProductInputServiceTest {
+
     @Test
     void takeItemKeyInputShouldReturnExpectedValueForInputBetweenZeroToNine(){
         ProductInputService spyProductInputService = Mockito.spy(ProductInputService.class);

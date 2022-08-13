@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 public class ProductInputService {
 
-    public static final Integer INVALID_INPUT = 9999;
-
     private static final Logger logger = LoggerFactory.getLogger(ProductInputService.class);
+
+    public static final Integer INVALID_INPUT = 9999;
 
     private final StoreRepository storeRepository;
 

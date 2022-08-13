@@ -10,13 +10,13 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 public final class Store {
+    private static Logger logger = LoggerFactory.getLogger(Store.class);
+
     private static Store INSTANCE;
 
     private static HashMap<Integer, String> productsInStore;
     private static HashMap<Integer, Double> productToPriceMap;
     private static HashMap<Integer, ProductCategory> productToCategoryMap;
-
-    private static Logger logger = LoggerFactory.getLogger(Store.class);
 
     private Store () {
 
