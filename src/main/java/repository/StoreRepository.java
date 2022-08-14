@@ -2,8 +2,8 @@ package repository;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import store.ProductCategory;
-import store.Store;
+import constant.ProductCategory;
+import model.store.Store;
 
 import java.util.HashMap;
 

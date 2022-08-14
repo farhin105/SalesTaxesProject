@@ -1,6 +1,6 @@
 package product_manager;
 
-import product.Product;
+import model.product.Product;
 
 public abstract class ProductManager {
     public Product getProduct (String name, Double price, boolean isImported) {

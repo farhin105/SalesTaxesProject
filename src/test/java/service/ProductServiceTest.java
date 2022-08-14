@@ -1,11 +1,10 @@
 package service;
 
+import model.product.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import product.*;
 import repository.StoreRepository;
-import store.ProductCategory;
-import store.ProductConstants;
+import constant.ProductCategory;
+import constant.ProductConstants;
 
 import java.util.ArrayList;
 import java.util.List;

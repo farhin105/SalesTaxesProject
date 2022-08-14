@@ -24,12 +24,12 @@ public class ProductInputService {
     }
 
     public List<Integer> takeProductInput() {
-        logger.info("takeProductInput() : shopping processing, taking input for product");
+        logger.info("takeProductInput() : shopping processing, taking input for model.billing.product");
         Integer itemKey;
 
         List<Integer> itemKeys = new ArrayList<>();
         do {
-            System.out.println("Please input the mentioned product number, or type '0' (zero) to terminate");
+            System.out.println("Please input the mentioned model.billing.product number, or type '0' (zero) to terminate");
             itemKey = takeItemKeyInput();
             if (isInputValid(itemKey)) {
                 itemKeys.add(itemKey);
@@ -61,7 +61,7 @@ public class ProductInputService {
     }
 
     private Integer getStoreSize() {
-        logger.info("getTotalInputs() : fetching store size");
+        logger.info("getTotalInputs() : fetching model.store size");
         return storeRepository.getStoreSize();
     }
 

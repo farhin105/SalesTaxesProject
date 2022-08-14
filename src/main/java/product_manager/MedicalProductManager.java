@@ -1,8 +1,8 @@
 package product_manager;
 
-import product.MedicalProduct;
-import product.Product;
-import store.ProductCategory;
+import model.product.MedicalProduct;
+import model.product.Product;
+import constant.ProductCategory;
 
 public class MedicalProductManager extends ProductManager{
     @Override

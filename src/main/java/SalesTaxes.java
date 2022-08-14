@@ -1,10 +1,10 @@
-import billing.Receipt;
+import model.billing.Receipt;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import product.Product;
+import model.product.Product;
 import service.ReceiptService;
 import service.ShoppingService;
-import store.Store;
+import model.store.Store;
 
 import java.util.List;
 

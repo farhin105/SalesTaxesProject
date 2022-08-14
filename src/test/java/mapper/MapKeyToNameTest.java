@@ -1,6 +1,6 @@
 package mapper;
 
-import store.ProductConstants;
+import constant.ProductConstants;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

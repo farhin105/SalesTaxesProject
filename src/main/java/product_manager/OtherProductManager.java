@@ -1,8 +1,8 @@
 package product_manager;
 
-import product.OtherProduct;
-import product.Product;
-import store.ProductCategory;
+import model.product.OtherProduct;
+import model.product.Product;
+import constant.ProductCategory;
 
 public class OtherProductManager extends ProductManager{
     @Override

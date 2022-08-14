@@ -1,10 +1,10 @@
 package service;
 
-import billing.Receipt;
+import model.billing.Receipt;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import product.Product;
+import model.product.Product;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

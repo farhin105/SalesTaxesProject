@@ -3,8 +3,7 @@ package service;
 import mapper.MapKeyToCategory;
 import mapper.MapKeyToName;
 import mapper.MapKeyToPrice;
-import store.ProductCategory;
-import store.ProductConstants;
+import constant.ProductCategory;
 
 import java.util.HashMap;
 import java.util.HashSet;

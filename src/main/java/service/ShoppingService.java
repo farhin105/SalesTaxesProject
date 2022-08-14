@@ -3,7 +3,7 @@ package service;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import product.Product;
+import model.product.Product;
 import repository.StoreRepository;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class ShoppingService {
     private void showShopScreen() {
         logger.info("showShopScreen() : showing products on screen");
 
-        System.out.println("Input corresponding number to purchase the product:");
+        System.out.println("Input corresponding number to purchase the model.billing.product:");
         for (int i=1; i<=storeRepository.getProductsInStore().size(); i++ ) {
             System.out.println(i+". ["
                     +storeRepository.getProductsInStore().get(i)+" at "

@@ -1,7 +1,7 @@
 package mapper;
 
-import store.ProductCategory;
-import store.ProductConstants;
+import constant.ProductCategory;
+import constant.ProductConstants;
 
 import java.util.HashMap;
 

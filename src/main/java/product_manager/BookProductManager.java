@@ -1,13 +1,13 @@
 package product_manager;
 
-import product.BookProduct;
-import product.Product;
-import store.ProductCategory;
+import model.product.BookProduct;
+import model.product.Product;
+import constant.ProductCategory;
 
 public class BookProductManager extends ProductManager{
     @Override
     public Product createProduct(String name, Double price, boolean isImported) {
-        System.out.println("Im in book product manager");
+        System.out.println("Im in book model.billing.product manager");
         return new BookProduct(name, price, ProductCategory.BOOK, isImported);
     }
 }

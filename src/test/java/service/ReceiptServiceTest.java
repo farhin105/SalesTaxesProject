@@ -1,10 +1,9 @@
 package service;
 
-import billing.Receipt;
+import model.billing.Receipt;
+import model.product.*;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import product.*;
-import store.ProductCategory;
+import constant.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;

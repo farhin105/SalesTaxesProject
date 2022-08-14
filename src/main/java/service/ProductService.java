@@ -1,12 +1,12 @@
 package service;
 
 import com.google.inject.Inject;
+import model.product.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import product.*;
 import product_manager.*;
 import repository.StoreRepository;
-import store.ProductCategory;
+import constant.ProductCategory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,19 +29,19 @@ public class ProductService {
             return null;
         }
 
-        logger.info("getProductsFromInputItems(List<Integer> basket) : getting product list for input items");
+        logger.info("getProductsFromInputItems(List<Integer> basket) : getting model.billing.product list for input items");
         List<Product> listOfProduct = new ArrayList<>();
 
         for (Integer inputItem : inputItems) {
             Product product = getProductForItemKey(inputItem);
 
-            logger.debug("getProductsFromInputItems(List<Integer> basket) : got product : {}",product);
+            logger.debug("getProductsFromInputItems(List<Integer> basket) : got model.billing.product : {}",product);
 
             if (product!=null) {
                 listOfProduct.add(product);
             }
             else {
-                logger.error("getProductsFromInputItems(List<Integer> basket) : fetched null product : {}", product);
+                logger.error("getProductsFromInputItems(List<Integer> basket) : fetched null model.billing.product : {}", product);
             }
         }
         return listOfProduct;
@@ -64,7 +64,7 @@ public class ProductService {
     }
 
     private ProductManager getProductManager (ProductCategory category) {
-        logger.info("getProductManager() : getting expected product manager for category : {}",category);
+        logger.info("getProductManager() : getting expected model.billing.product manager for category : {}",category);
         return switch (category) {
             case BOOK -> new BookProductManager();
             case MEDICAL -> new MedicalProductManager();
