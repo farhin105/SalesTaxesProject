@@ -71,7 +71,7 @@ class ProductServiceTest {
                 .thenReturn(true)
                 .thenReturn(false);
 
-        when(storeRepository.getStoreSize()).thenReturn(9);
+        when(storeRepository.isItemValid(anyInt())).thenReturn(true);
 
         List<Product> actualList = productService.getProductsFromInputItems(inputList);
 
@@ -122,7 +122,10 @@ class ProductServiceTest {
         when(storeRepository.isItemImported(anyInt())).thenReturn(false)
                 .thenReturn(true);
 
-        when(storeRepository.getStoreSize()).thenReturn(9);
+        when(storeRepository.isItemValid(anyInt()))
+                .thenReturn(true)
+                .thenReturn(false)
+                .thenReturn(true);
 
         List<Product> actualList = productService.getProductsFromInputItems(inputList);
 

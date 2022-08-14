@@ -60,16 +60,11 @@ public class ProductInputService {
         }
     }
 
-    private Integer getStoreSize() {
-        logger.info("getTotalInputs() : fetching model.store size");
-        return storeRepository.getStoreSize();
-    }
-
     private boolean isInputValid(Integer itemKey) {
-        return itemKey > 0 && itemKey <= getStoreSize();
+        return storeRepository.isItemValid(itemKey);
     }
 
     private boolean isInputInRange(Integer itemKey) {
-        return itemKey >= 0 && itemKey <= getStoreSize();
+        return itemKey ==0 || storeRepository.isItemValid(itemKey);
     }
 }

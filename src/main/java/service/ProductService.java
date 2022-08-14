@@ -75,7 +75,7 @@ public class ProductService {
 
     private boolean isInputValid (Integer inputItem) {
         logger.info("isInputValid() : checking if the input value, {} is valid or not",inputItem);
-        return inputItem!=null && inputItem>0 && inputItem<=storeRepository.getStoreSize();
+        return storeRepository.isItemValid(inputItem);
     }
 
 }

@@ -29,8 +29,6 @@ public class StoreRepository {
         return store.getProductToCategoryMap();
     }
 
-    public Integer getStoreSize () { return store.getProductToPriceMap().size(); }
-
     public String getNameOfItem (Integer key) {
         logger.info("getNameOfItem (Integer key) : getting name corresponding to the key = {}.",key);
         HashMap<Integer, String> productsInStore = store.getProductsInStore();
@@ -63,5 +61,9 @@ public class StoreRepository {
 
     public boolean isItemImported (Integer key) {
         return store.getImportedProductKeySet().contains(key);
+    }
+
+    public boolean isItemValid (Integer key) {
+        return store.getProductsInStore().containsKey(key);
     }
 }
