@@ -24,12 +24,12 @@ public class ProductInputService {
     }
 
     public List<Integer> takeProductInput() {
-        logger.info("takeProductInput() : shopping processing, taking input for model.billing.product");
+        logger.info("takeProductInput() : shopping processing, taking input for product");
         Integer itemKey;
 
         List<Integer> itemKeys = new ArrayList<>();
         do {
-            System.out.println("Please input the mentioned model.billing.product number, or type '0' (zero) to terminate");
+            System.out.println("Please input the mentioned product number, or type '0' (zero) to terminate");
             itemKey = takeItemKeyInput();
             if (isInputValid(itemKey)) {
                 itemKeys.add(itemKey);
@@ -43,7 +43,7 @@ public class ProductInputService {
         Integer input = scanInput();
         if (!isInputInRange(input)) {
             logger.error("takeItemKeyInput() : input invalid");
-            System.out.println("Invalid input.");
+            System.out.println("\nInvalid input.");
             return INVALID_INPUT;
         }
         return input;

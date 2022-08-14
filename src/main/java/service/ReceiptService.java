@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ReceiptService {
 
-    private final Logger logger = LoggerFactory.getLogger(ReceiptService.class);
+    private static final Logger logger = LoggerFactory.getLogger(ReceiptService.class);
 
     private final BillingService billingService;
 
@@ -45,6 +45,7 @@ public class ReceiptService {
             System.out.println("Shopping cart is empty");
             return;
         }
+        System.out.println("-------------- Receipt ----------------");
         for (int i = 0; i<receipt.getProductBillList().size(); i++) {
             System.out.println(receipt.getProductList().get(i).getName()+ " : "
                     + receipt.getProductBillList().get(i));

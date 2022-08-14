@@ -7,7 +7,7 @@ import model.product.Product;
 
 public class BillingService{
 
-    private final Logger logger = LoggerFactory.getLogger(BillingService.class);
+    private static final Logger logger = LoggerFactory.getLogger(BillingService.class);
 
     private final TaxCalculatorService taxCalculatorService;
 

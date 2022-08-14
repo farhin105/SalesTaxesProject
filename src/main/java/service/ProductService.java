@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import model.product.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import product_manager.*;
+import productManagerFactory.*;
 import repository.StoreRepository;
 import constant.ProductCategory;
 

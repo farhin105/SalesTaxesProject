@@ -16,12 +16,10 @@ class BillingServiceTest {
     private final TaxCalculatorService taxCalculatorService = mock(TaxCalculatorService.class);
     private final BillingService billingService = new BillingService(taxCalculatorService);
 
-    private final ProductConstants CONST = new ProductConstants();
-
-    private final BookProduct bookProduct = new BookProduct(CONST.NAME_ONE_BOOK, CONST.PRICE_ONE_BOOK,
+    private final BookProduct bookProduct = new BookProduct(ProductConstants.NAME_ONE_BOOK, ProductConstants.PRICE_ONE_BOOK,
             ProductCategory.BOOK,false);
-    private final OtherProduct otherProduct = new OtherProduct(CONST.NAME_ONE_BOTTLE_PERFUME,
-            CONST.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
+    private final OtherProduct otherProduct = new OtherProduct(ProductConstants.NAME_ONE_BOTTLE_PERFUME,
+            ProductConstants.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
 
 
     @Test

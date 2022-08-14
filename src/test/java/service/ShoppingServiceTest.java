@@ -72,14 +72,13 @@ class ShoppingServiceTest {
 
     @Test
     void getProductsInputValidList() {
-        ProductConstants CONST = new ProductConstants();
 
-        BookProduct bookProduct = new BookProduct(CONST.NAME_ONE_BOOK, CONST.PRICE_ONE_BOOK,
+        BookProduct bookProduct = new BookProduct(ProductConstants.NAME_ONE_BOOK, ProductConstants.PRICE_ONE_BOOK,
                 ProductCategory.BOOK,false);
-        OtherProduct otherProduct = new OtherProduct(CONST.NAME_ONE_BOTTLE_PERFUME,
-                CONST.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
-        FoodProduct foodProduct = new FoodProduct(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE,
-                CONST.PRICE_IMPORTED_BOX_CHOCOLATE,ProductCategory.FOOD,true);
+        OtherProduct otherProduct = new OtherProduct(ProductConstants.NAME_ONE_BOTTLE_PERFUME,
+                ProductConstants.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
+        FoodProduct foodProduct = new FoodProduct(ProductConstants.NAME_ONE_IMPORTED_BOX_CHOCOLATE,
+                ProductConstants.PRICE_IMPORTED_BOX_CHOCOLATE,ProductCategory.FOOD,true);
 
         List<Integer> inputList = new ArrayList<>() {{
             add(1);

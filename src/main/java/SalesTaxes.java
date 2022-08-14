@@ -7,23 +7,28 @@ import service.ShoppingService;
 import model.store.Store;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class SalesTaxes {
     public static void main(String[] args) {
         System.out.println("---------- SALES TAXES ----------");
-        Store store = Store.getINSTANCE();
 
         Injector injector = Guice.createInjector(new SalesTaxesGuiceModule());
 
-        ShoppingService shoppingService = injector.getInstance(ShoppingService.class);
-        List<Integer> items = shoppingService.shop();
-        System.out.println(items);
-        List<Product> productList = shoppingService.getProducts(items);
-        System.out.println(productList);
+        char continueShopping;
+        do {
+            ShoppingService shoppingService = injector.getInstance(ShoppingService.class);
+            List<Integer> items = shoppingService.shop();
+            List<Product> productList = shoppingService.getProducts(items);
 
-        ReceiptService receiptService = injector.getInstance(ReceiptService.class);
-        //getReceipt
-        Receipt receipt = receiptService.getReceipt(productList);
-        receiptService.printReceipt(receipt);
+            ReceiptService receiptService = injector.getInstance(ReceiptService.class);
+            //getReceipt
+            Receipt receipt = receiptService.getReceipt(productList);
+            receiptService.printReceipt(receipt);
+
+            System.out.println("\ncontinue shopping? [press 'y' continue / any key to terminate]");
+            continueShopping = new Scanner(System.in).next().charAt(0);
+        } while (continueShopping == 'y');
+        System.out.println("\nclosing program....");
     }
 }

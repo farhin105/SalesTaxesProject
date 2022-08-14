@@ -20,28 +20,28 @@ import static org.mockito.Mockito.when;
 
 
 class ProductServiceTest {
-    private final ProductConstants CONST = new ProductConstants();
+
     private final StoreRepository storeRepository = mock(StoreRepository.class);
 
     private final ProductService productService = new ProductService(storeRepository);
 
-    private final BookProduct bookProduct = new BookProduct(CONST.NAME_ONE_BOOK, CONST.PRICE_ONE_BOOK,
+    private final BookProduct bookProduct = new BookProduct(ProductConstants.NAME_ONE_BOOK, ProductConstants.PRICE_ONE_BOOK,
             ProductCategory.BOOK,false);
-    private final OtherProduct otherProduct = new OtherProduct(CONST.NAME_ONE_BOTTLE_PERFUME,
-            CONST.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
-    private final FoodProduct foodProduct = new FoodProduct(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE,
-            CONST.PRICE_IMPORTED_BOX_CHOCOLATE,ProductCategory.FOOD,true);
-    private final MedicalProduct medicalProduct = new MedicalProduct(CONST.NAME_ONE_PACKET_HEADACHE_PILLS,
-            CONST.PRICE_PACKET_HEADACHE_PILLS,ProductCategory.MEDICAL,false);
+    private final OtherProduct otherProduct = new OtherProduct(ProductConstants.NAME_ONE_BOTTLE_PERFUME,
+            ProductConstants.PRICE_BOTTLE_PERFUME,ProductCategory.OTHER,false);
+    private final FoodProduct foodProduct = new FoodProduct(ProductConstants.NAME_ONE_IMPORTED_BOX_CHOCOLATE,
+            ProductConstants.PRICE_IMPORTED_BOX_CHOCOLATE,ProductCategory.FOOD,true);
+    private final MedicalProduct medicalProduct = new MedicalProduct(ProductConstants.NAME_ONE_PACKET_HEADACHE_PILLS,
+            ProductConstants.PRICE_PACKET_HEADACHE_PILLS,ProductCategory.MEDICAL,false);
 
 
     @Test
     void getProductsFromInputItemsValidInput() {
         List<Integer> inputList = new ArrayList<>(){{
-            add(CONST.KEY_ONE_BOOK);
-            add(CONST.KEY_BOTTLE_PERFUME);
-            add(CONST.KEY_IMPORTED_BOX_CHOCOLATE);
-            add(CONST.KEY_PACKET_HEADACHE_PILLS);
+            add(ProductConstants.KEY_ONE_BOOK);
+            add(ProductConstants.KEY_BOTTLE_PERFUME);
+            add(ProductConstants.KEY_IMPORTED_BOX_CHOCOLATE);
+            add(ProductConstants.KEY_PACKET_HEADACHE_PILLS);
         }};
 
         List<Product> expectedList = new ArrayList<>() {{
@@ -51,15 +51,15 @@ class ProductServiceTest {
             add(medicalProduct);
         }};
 
-        when(storeRepository.getNameOfItem(anyInt())).thenReturn(CONST.NAME_ONE_BOOK)
-                .thenReturn(CONST.NAME_ONE_BOTTLE_PERFUME)
-                .thenReturn(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE)
-                .thenReturn(CONST.NAME_ONE_PACKET_HEADACHE_PILLS);
+        when(storeRepository.getNameOfItem(anyInt())).thenReturn(ProductConstants.NAME_ONE_BOOK)
+                .thenReturn(ProductConstants.NAME_ONE_BOTTLE_PERFUME)
+                .thenReturn(ProductConstants.NAME_ONE_IMPORTED_BOX_CHOCOLATE)
+                .thenReturn(ProductConstants.NAME_ONE_PACKET_HEADACHE_PILLS);
 
-        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(CONST.PRICE_ONE_BOOK)
-                .thenReturn(CONST.PRICE_BOTTLE_PERFUME)
-                .thenReturn(CONST.PRICE_IMPORTED_BOX_CHOCOLATE)
-                .thenReturn(CONST.PRICE_PACKET_HEADACHE_PILLS);
+        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(ProductConstants.PRICE_ONE_BOOK)
+                .thenReturn(ProductConstants.PRICE_BOTTLE_PERFUME)
+                .thenReturn(ProductConstants.PRICE_IMPORTED_BOX_CHOCOLATE)
+                .thenReturn(ProductConstants.PRICE_PACKET_HEADACHE_PILLS);
 
         when(storeRepository.getCategoryOfItem(anyInt())).thenReturn(ProductCategory.BOOK)
                 .thenReturn(ProductCategory.OTHER)
@@ -100,9 +100,9 @@ class ProductServiceTest {
      */
     void getProductsFromInputItemsShouldIgnoreNullProduct() {
         List<Integer> inputList = new ArrayList<>(){{
-            add(CONST.KEY_ONE_BOOK);
+            add(ProductConstants.KEY_ONE_BOOK);
             add(999);
-            add(CONST.KEY_IMPORTED_BOX_CHOCOLATE);
+            add(ProductConstants.KEY_IMPORTED_BOX_CHOCOLATE);
         }};
 
         List<Product> expectedList = new ArrayList<>() {{
@@ -110,11 +110,11 @@ class ProductServiceTest {
             add(foodProduct);
         }};
 
-        when(storeRepository.getNameOfItem(anyInt())).thenReturn(CONST.NAME_ONE_BOOK)
-                .thenReturn(CONST.NAME_ONE_IMPORTED_BOX_CHOCOLATE);
+        when(storeRepository.getNameOfItem(anyInt())).thenReturn(ProductConstants.NAME_ONE_BOOK)
+                .thenReturn(ProductConstants.NAME_ONE_IMPORTED_BOX_CHOCOLATE);
 
-        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(CONST.PRICE_ONE_BOOK)
-                .thenReturn(CONST.PRICE_IMPORTED_BOX_CHOCOLATE);
+        when(storeRepository.getPriceOfItem(anyInt())).thenReturn(ProductConstants.PRICE_ONE_BOOK)
+                .thenReturn(ProductConstants.PRICE_IMPORTED_BOX_CHOCOLATE);
 
         when(storeRepository.getCategoryOfItem(anyInt())).thenReturn(ProductCategory.BOOK)
                 .thenReturn(ProductCategory.FOOD);

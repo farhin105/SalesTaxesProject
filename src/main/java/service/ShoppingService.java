@@ -34,11 +34,11 @@ public class ShoppingService {
     private void showShopScreen() {
         logger.info("showShopScreen() : showing products on screen");
 
-        System.out.println("Input corresponding number to purchase the model.billing.product:");
+        System.out.println("Input corresponding number to purchase the product:");
         for (int i=1; i<=storeRepository.getProductsInStore().size(); i++ ) {
             System.out.println(i+". ["
                     +storeRepository.getProductsInStore().get(i)+" at "
-                    +storeRepository.getProductToPriceMap().get(i)+"]");
+                    +storeRepository.getProductToPriceMap().get(i)+"]\n");
         }
     }
 
@@ -49,7 +49,7 @@ public class ShoppingService {
     }
 
     private List<Integer> takeInputItems () {
-        logger.info("takeInputItems() : calling productInputService.takeProductInput() to take input ");
+        logger.info("takeInputItems() : calling takeProductInput() to take input ");
         return   productInputService.takeProductInput();
     }
 }
