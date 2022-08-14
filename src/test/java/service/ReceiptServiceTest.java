@@ -32,22 +32,26 @@ class ReceiptServiceTest {
         List<Product> productList = new ArrayList<>(){{
             add(bookProduct);
             add(foodProduct);
+            add(bookProduct);
         }};
 
         when(billingService.calculateBillOfProduct(any(Product.class)))
-                .thenReturn(2.3,2.4,2.3,2.4);
+                .thenReturn(20.889999999999997,12.49,13.5155555555,
+                        20.889999999999997,12.49,13.5155555555);
 
         when(billingService.calculateTaxOfProduct(any(Product.class)))
-                .thenReturn(0.3)
-                .thenReturn(0.4);
+                .thenReturn(1.9)
+                .thenReturn(0.0)
+                .thenReturn(0.25);
 
 
         Receipt receipt = receiptService.getReceipt(productList);
 
-        assertEquals(4.7, receipt.getTotalBill());
-        assertEquals(0.7, receipt.getSalesTaxes());
-        assertEquals(2, receipt.getProductBillList().size());
-        assertEquals(2.3,receipt.getProductBillList().get(0));
-        assertEquals(2.4, receipt.getProductBillList().get(1));
+        assertEquals(46.9, receipt.getTotalBill());
+        assertEquals(2.15, receipt.getSalesTaxes());
+        assertEquals(3, receipt.getProductBillList().size());
+        assertEquals(20.89,receipt.getProductBillList().get(0));
+        assertEquals(12.49, receipt.getProductBillList().get(1));
+        assertEquals(13.52, receipt.getProductBillList().get(2));
     }
 }

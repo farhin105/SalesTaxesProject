@@ -17,11 +17,13 @@ public class BillingService{
     }
 
     public Double calculateBillOfProduct(Product product) {
+        logger.info("calculateBillOfProduct(Product product) : calculating bill of a product");
         return product.getPrice()+ taxCalculatorService.calculateTax(product);
     }
 
 
     public Double calculateTaxOfProduct(Product product) {
+        logger.info("calculateTaxOfProduct(Product product) : calculating tax of a product");
         return taxCalculatorService.calculateTax(product);
     }
 }
