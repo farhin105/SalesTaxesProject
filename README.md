@@ -1,4 +1,4 @@
-## _Sales Taxes_
+## _SalesTaxesProject_
 SalesTaxesProject generates the receipt for purchased items, containing the list of products, their bills, sales taxes, and the total bill. It offers you the option to select products from a list of products and produces the receipt for it.
 
 ## How to run:
