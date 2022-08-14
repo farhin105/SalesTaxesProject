@@ -39,7 +39,7 @@ public class ProductInputService {
         return itemKeys;
     }
 
-    public Integer takeItemKeyInput() {
+    private Integer takeItemKeyInput() {
         Integer input = scanInput();
         if (!isInputInRange(input)) {
             logger.error("takeItemKeyInput() : input invalid");
@@ -49,7 +49,7 @@ public class ProductInputService {
         return input;
     }
 
-    public Integer scanInput() {
+    private Integer scanInput() {
         Scanner sc = new Scanner(System.in);
         try {
             Integer input = sc.nextInt();

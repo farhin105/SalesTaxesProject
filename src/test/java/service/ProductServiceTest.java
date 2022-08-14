@@ -9,14 +9,18 @@ import constant.ProductConstants;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
 class ProductServiceTest {
-    ProductConstants CONST = new ProductConstants();
+    private final ProductConstants CONST = new ProductConstants();
     private final StoreRepository storeRepository = mock(StoreRepository.class);
 
     private final ProductService productService = new ProductService(storeRepository);
@@ -133,5 +137,12 @@ class ProductServiceTest {
     void getProductsFromInputItemsNullInputList() {
         List<Product> actualList = productService.getProductsFromInputItems(null);
         assertNull(actualList);
+    }
+
+    @Test
+    void getProductsFromInputItemsEmptyInputList() {
+        List<Product> actualList = productService.getProductsFromInputItems(new ArrayList<>());
+        assertNotNull(actualList);
+        assertEquals(0, actualList.size());
     }
 }
